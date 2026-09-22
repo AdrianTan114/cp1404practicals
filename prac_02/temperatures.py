@@ -4,8 +4,8 @@ Program for temperature conversion
 """
 
 MENU = """C - Convert Celsius to Fahrenheit
-    F - Convert Fahrenheit to Celsius
-    Q - Quit"""
+F - Convert Fahrenheit to Celsius
+Q - Quit"""
 
 
 def main():
