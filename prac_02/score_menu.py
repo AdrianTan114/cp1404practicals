@@ -14,7 +14,8 @@ def main():
         if choice == "G":
             score = get_valid_number(0, 100, "Score: ")
         elif choice == "P":
-            pass
+            result = determine_result(score)
+            print(f"Score {score} is {result}")
         elif choice == "S":
             pass
         else:
@@ -31,5 +32,17 @@ def get_valid_number(low, high, prompt):
         print("Invalid number")
         number = float(input(prompt))
     return number
+
+
+def determine_result(score):
+    if score < 0 or score > 100:
+        return "Invalid"
+    elif score >= 90:
+        return "Excellent"
+    elif score >= 50:
+        return "Passable"
+    else:
+        return "Bad"
+
 
 main()
