@@ -12,9 +12,10 @@ def main():
     number_of_quick_picks = int(input("How many quick picks? "))
     for i in range(number_of_quick_picks):
         quick_pick = create_quick_pick(LOWEST_NUMBER, HIGHEST_NUMBER, NUMBER_OF_RANDOM_NUMBERS)
-        for number in quick_pick:
-            print(f"{number:2}", end=" ")
-        print()
+        # for number in quick_pick:
+        #     print(f"{number:2}", end=" ")
+        # print()
+        print(" ".join(f"{number:2}" for number in quick_pick))
 
 
 def create_quick_pick(low, high, numbers_per_line):
