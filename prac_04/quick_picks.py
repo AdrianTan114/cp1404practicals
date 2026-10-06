@@ -17,16 +17,16 @@ def main():
         print()
 
 
-def create_quick_pick(low, high, number_of_numbers):
-    """Create a line containing number_of_numbers numbers, sorted in ascending order."""
-    numbers = []
-    for i in range(number_of_numbers):
+def create_quick_pick(low, high, numbers_per_line):
+    """Create a line containing numbers_per_line numbers, sorted in ascending order."""
+    quick_pick = []
+    for i in range(numbers_per_line):
         number = randint(low, high)
-        while number in numbers:
+        while number in quick_pick:
             number = randint(low, high)
-        numbers.append(number)
-    numbers.sort()
-    return numbers
+        quick_pick.append(number)
+    quick_pick.sort()
+    return quick_pick
 
 
 main()
