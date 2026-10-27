@@ -1,7 +1,7 @@
 """
 Guitar Class
 Estimate: 25 minutes
-Actual:   - minutes
+Actual:   35 minutes
 """
 import datetime
 
