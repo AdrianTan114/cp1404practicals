@@ -39,6 +39,10 @@ def main():
             print("Invalid input")
         display_menu()
         choice = input(">>> ").upper()
+    save_choice = input(f"Would you like to save to {DEFAULT_FILENAME}?").upper()
+    if save_choice == "YES" or save_choice == "Y":
+        save_projects(projects, DEFAULT_FILENAME)
+    print("Thank you for using custom-built project management software.")
 
 
 def load_projects(filename):
