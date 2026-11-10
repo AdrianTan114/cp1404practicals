@@ -18,9 +18,14 @@ def main():
     while choice != "Q":
         if choice == "L":
             filename = input("Filename: ")
+            if filename == "":
+                filename = DEFAULT_FILENAME
             projects = load_projects(filename)
         elif choice == "S":
-            pass
+            filename = input("Filename: ")
+            if filename == "":
+                filename = DEFAULT_FILENAME
+            save_projects(projects, filename)
         elif choice == "D":
             display_projects(projects)
         elif choice == "F":
@@ -109,6 +114,15 @@ def update_project(projects):
     priority = input("New priority: ")
     if priority != "":
         projects[project_choice].priority = int(priority)
+
+
+def save_projects(projects, filename):
+    with open(filename, "w") as out_file:
+        print("Name\tStart Date\tPriority\tCost Estimate\tCompletion Percentage", file=out_file)  # Print header row
+        for project in projects:
+            row = f"{project.name}\t{project.date}\t{project.priority}\t{project.cost}\t{project.completion_percentage}"
+            print(row, file=out_file)
+    print(f"Saved {len(projects)} projects to {filename}")
 
 
 main()
