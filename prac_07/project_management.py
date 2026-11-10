@@ -60,9 +60,14 @@ def display_menu():
 
 
 def display_projects(projects):
-    incomplete_projects = [project for project in projects if project.completion_percentage < 100]
+    incomplete_projects = []
+    completed_projects = []
+    for project in projects:
+        if project.is_complete():
+            completed_projects.append(project)
+        else:
+            incomplete_projects.append(project)
     incomplete_projects.sort()
-    completed_projects = [project for project in projects if project.completion_percentage == 100]
     completed_projects.sort()
     print("Incomplete projects:")
     for project in incomplete_projects:
