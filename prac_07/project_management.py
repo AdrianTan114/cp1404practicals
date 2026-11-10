@@ -1,7 +1,8 @@
 """
 Project Management Program
 Estimate: 45 minutes
-Actual:   _ minutes
+Actual:   145 minutes
+To do: error checking, sorting by date when filtering.
 """
 
 from project import Project
@@ -11,6 +12,7 @@ DEFAULT_FILENAME = "projects.txt"
 
 
 def main():
+    """Menu-driven program to display and manage projects."""
     print("Welcome to Pythonic Project Management")
     projects = load_projects(DEFAULT_FILENAME)
     display_menu()
@@ -39,13 +41,14 @@ def main():
             print("Invalid input")
         display_menu()
         choice = input(">>> ").upper()
-    save_choice = input(f"Would you like to save to {DEFAULT_FILENAME}?").upper()
+    save_choice = input(f"Would you like to save to {DEFAULT_FILENAME}? ").upper()
     if save_choice == "YES" or save_choice == "Y":
         save_projects(projects, DEFAULT_FILENAME)
     print("Thank you for using custom-built project management software.")
 
 
 def load_projects(filename):
+    """Load projects from filename."""
     projects = []
     with open(filename, "r") as in_file:
         in_file.readline()  # Skip header row
@@ -59,6 +62,7 @@ def load_projects(filename):
 
 
 def display_menu():
+    """Print menu."""
     print("- (L)oad projects")
     print("- (S)ave projects")
     print("- (D)isplay projects")
@@ -69,6 +73,7 @@ def display_menu():
 
 
 def display_projects(projects):
+    """Print projects, separating completed and incomplete projects."""
     incomplete_projects = []
     completed_projects = []
     for project in projects:
@@ -80,23 +85,26 @@ def display_projects(projects):
     completed_projects.sort()
     print("Incomplete projects:")
     for project in incomplete_projects:
-        print(project)
+        print(" ", project)
     print("Completed projects:")
     for project in completed_projects:
-        print(project)
+        print(" ", project)
 
 
 def filter_projects_by_date(projects, filter_date):
+    """Print only projects started after filter_date."""
     for project in projects:
-        if convert_string_to_datetime(project.date) > filter_date:
+        if convert_string_to_datetime(project.date) >= filter_date:
             print(project)
 
 
 def convert_string_to_datetime(string):
+    """Convert string to datetime object."""
     return datetime.strptime(string, "%d/%m/%Y")
 
 
 def add_project(projects):
+    """Get new project details from the user."""
     print("Let's add a new project")
     name = input("Name: ")
     date = convert_string_to_datetime(input("Start date (dd/mm/yy): ")).date().strftime("%d/%m/%Y")
@@ -108,6 +116,7 @@ def add_project(projects):
 
 
 def update_project(projects):
+    """Allow the user to change the priority and completion percentage of a project."""
     for i, project in enumerate(projects):
         print(i, project)
     project_choice = int(input("Project choice: "))
@@ -121,6 +130,7 @@ def update_project(projects):
 
 
 def save_projects(projects, filename):
+    """Save projects to filename."""
     with open(filename, "w") as out_file:
         print("Name\tStart Date\tPriority\tCost Estimate\tCompletion Percentage", file=out_file)  # Print header row
         for project in projects:
