@@ -5,6 +5,7 @@ Actual:   _ minutes
 """
 
 from project import Project
+from datetime import datetime
 
 DEFAULT_FILENAME = "projects.txt"
 
@@ -23,7 +24,8 @@ def main():
         elif choice == "D":
             display_projects(projects)
         elif choice == "F":
-            pass
+            filter_date = datetime.strptime(input("Show projects that start after date (dd/mm/yy): "), "%d/%m/%Y")
+            filter_projects_by_date(projects, filter_date)
         elif choice == "A":
             pass
         elif choice == "U":
@@ -40,7 +42,8 @@ def load_projects(filename):
         in_file.readline()  # Skip header row
         for line in in_file:
             line = line.strip().split("\t")
-            project = Project(line[0], line[1], int(line[2]), float(line[3]), int(line[4]))
+            date = convert_string_to_datetime(line[1]).date().strftime("%d/%m/%Y")
+            project = Project(line[0], date, int(line[2]), float(line[3]), int(line[4]))
             projects.append(project)
     print(f"Loaded {len(projects)} projects from {filename}")
     return projects
@@ -67,6 +70,16 @@ def display_projects(projects):
     print("Completed projects:")
     for project in completed_projects:
         print(project)
+
+
+def filter_projects_by_date(projects, filter_date):
+    for project in projects:
+        if convert_string_to_datetime(project.date) > filter_date:
+            print(project)
+
+
+def convert_string_to_datetime(string):
+    return datetime.strptime(string, "%d/%m/%Y")
 
 
 main()
