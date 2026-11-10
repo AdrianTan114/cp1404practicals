@@ -21,7 +21,7 @@ def main():
         elif choice == "S":
             pass
         elif choice == "D":
-            pass
+            display_projects(projects)
         elif choice == "F":
             pass
         elif choice == "A":
@@ -54,6 +54,19 @@ def display_menu():
     print("- (A)dd new project")
     print("- (U)pdate project")
     print("- (Q)uit")
+
+
+def display_projects(projects):
+    incomplete_projects = [project for project in projects if project.completion_percentage < 100]
+    incomplete_projects.sort()
+    completed_projects = [project for project in projects if project.completion_percentage == 100]
+    completed_projects.sort()
+    print("Incomplete projects:")
+    for project in incomplete_projects:
+        print(project)
+    print("Completed projects:")
+    for project in completed_projects:
+        print(project)
 
 
 main()
