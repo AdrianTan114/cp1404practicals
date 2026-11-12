@@ -20,5 +20,10 @@ class ConvertDistanceApp(App):
         km = float(miles) * 1.60934
         self.message = str(km)
 
+    def handle_increment(self, change):
+        """Handle incrementing input text."""
+        value = float(self.root.ids.input_number.text) + change
+        self.root.ids.input_number.text = str(value)
+
 
 ConvertDistanceApp().run()
