@@ -27,6 +27,7 @@ class ConvertDistanceApp(App):
         """Handle incrementing input text."""
         value = self.get_valid_miles() + change
         self.root.ids.input_number.text = str(value)
+        self.handle_convert()
 
     def get_valid_miles(self):
         """Error check miles to ensure it is a float."""
